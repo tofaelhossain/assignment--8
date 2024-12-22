@@ -1,6 +1,7 @@
+const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 export async function getMoviesByCategory(category) {
   const TMDB_API_KEY = process.env.TMDB_API_KEY; // Store your TMDB API key in .env.local
-  const TMDB_API_URL = `http://localhost:3000/api/movies/${category}?api_key=${TMDB_API_KEY}`;
+  const TMDB_API_URL = `${NEXT_PUBLIC_BASE_URL}/${category}?api_key=${TMDB_API_KEY}`;
 
   try {
     const response = await fetch(TMDB_API_URL);
@@ -16,7 +17,7 @@ export async function getMoviesByCategory(category) {
 
 export async function getMoviesById(movieId) {
   const TMDB_API_KEY = process.env.TMDB_API_KEY; // Store your TMDB API key in .env.local
-  const TMDB_API_URL = `http://localhost:3000/api/movie/${movieId}?api_key=${TMDB_API_KEY}`;
+  const TMDB_API_URL = `${NEXT_PUBLIC_BASE_URL}/${movieId}?api_key=${TMDB_API_KEY}`;
 
   try {
     const response = await fetch(TMDB_API_URL);
@@ -32,7 +33,7 @@ export async function getMoviesById(movieId) {
 
 export async function getSimilarMoviesById(movieId) {
   const TMDB_API_KEY = process.env.TMDB_API_KEY; // Store your TMDB API key in .env.local
-  const TMDB_API_URL = `http://localhost:3000/api/movie/${movieId}/similar`;
+  const TMDB_API_URL = `${NEXT_PUBLIC_BASE_URL}/${movieId}/similar`;
 
   try {
     const response = await fetch(TMDB_API_URL);
@@ -47,7 +48,7 @@ export async function getSimilarMoviesById(movieId) {
 }
 
 export async function getMovieDetailsWithCast(movieId) {
-  const MOVIE_DETAILS_URL = `http://localhost:3000/api/movie/${movieId}/credits`;
+  const MOVIE_DETAILS_URL = `${NEXT_PUBLIC_BASE_URL}/${movieId}/credits`;
 
   try {
     const response = await fetch(MOVIE_DETAILS_URL);

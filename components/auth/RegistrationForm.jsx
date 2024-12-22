@@ -30,7 +30,7 @@ export default function RegistrationForm() {
         type="password"
         name="password"
         id="password"
-        placeholder="Create Password"
+        placeholder="Create Password atleast 6 character"
         className="w-full p-3 bg-moviedb-gray text-white rounded focus:outline-none focus:ring-2 focus:ring-moviedb-red"
         required
       />
@@ -38,7 +38,7 @@ export default function RegistrationForm() {
         type="password"
         name="confPassword"
         id="confPassword"
-        placeholder="Confirm Password"
+        placeholder="Confirm Password atleast 6 character"
         className="w-full p-3 bg-moviedb-gray text-white rounded focus:outline-none focus:ring-2 focus:ring-moviedb-red"
         required
       />
