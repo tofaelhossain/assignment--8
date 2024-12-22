@@ -7,10 +7,12 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 export default function LoginForm() {
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const { setAuth } = useAuth();
   const router = useRouter();
   async function onSubmit(event) {
     event.preventDefault();
+    setLoading(true);
     try {
       const formData = new FormData(event.currentTarget);
       const found = await performLogin(formData);
@@ -23,6 +25,8 @@ export default function LoginForm() {
       }
     } catch (err) {
       setError(err.message);
+    } finally {
+      setLoading(false);
     }
   }
   return (
@@ -47,9 +51,12 @@ export default function LoginForm() {
         />
         <button
           type="submit"
-          className="w-full bg-moviedb-red text-white py-3 rounded hover:bg-red-700 transition duration-300"
+          className={`w-full bg-moviedb-red text-white py-3 rounded transition duration-300 ${
+            loading ? "opacity-50 cursor-not-allowed" : "hover:bg-red-700"
+          }`}
+          disabled={loading}
         >
-          Sign In
+          {loading ? "Processing..." : "Sign In"}
         </button>
       </form>
     </>

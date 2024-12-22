@@ -23,6 +23,7 @@ export default function RegistrationForm() {
   });
 
   const [isAgreed, setIsAgreed] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -88,6 +89,7 @@ export default function RegistrationForm() {
     e.preventDefault();
 
     if (validateForm()) {
+      setLoading(true);
       try {
         // Call the server-side action (registerUser)
 
@@ -100,6 +102,8 @@ export default function RegistrationForm() {
       } catch (error) {
         //console.error("Registration failed:", error);
         alert("Something went wrong. Please try again." + error);
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -179,9 +183,12 @@ export default function RegistrationForm() {
 
       <button
         type="submit"
-        className="w-full bg-moviedb-red text-white py-3 rounded hover:bg-red-700 transition duration-300"
+        className={`w-full bg-moviedb-red text-white py-3 rounded transition duration-300 ${
+          loading ? "opacity-50 cursor-not-allowed" : "hover:bg-red-700"
+        }`}
+        disabled={loading} // Disable button when loading is true
       >
-        Sign Up
+        {loading ? "Processing..." : "Sign Up"}
       </button>
     </form>
   );

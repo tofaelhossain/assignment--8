@@ -5,7 +5,11 @@ export default function WatchLaterRemoveButton({
   onDelete,
 }) {
   const handleDelete = () => {
-    if (onDelete) {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this movie from the watchlist?"
+    );
+
+    if (confirmDelete && onDelete) {
       onDelete(movie_id, user_id); // Pass movie_id and user_id to the onDelete function
     }
   };
