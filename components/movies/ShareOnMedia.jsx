@@ -1,11 +1,10 @@
 "use client";
-import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function ShareOnMedia({ movie }) {
   const [currentUrl, setCurrentUrl] = useState("");
-
+  //console.log("share", movie);
   useEffect(() => {
     if (typeof window !== "undefined") {
       setCurrentUrl(window.location.href);
@@ -34,19 +33,6 @@ export default function ShareOnMedia({ movie }) {
 
   return (
     <>
-      <Head>
-        <title>{movie.title}</title>
-        <meta name="description" content={movie?.overview} />
-        <meta property="og:title" content={movie?.title} />
-        <meta property="og:description" content={movie?.overview} />
-        <meta property="og:image" content={movie?.poster_path} />
-        <meta property="og:url" content={currentUrl} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={movie?.title} />
-        <meta name="twitter:description" content={movie?.overview} />
-        <meta name="twitter:image" content={movie?.poster_path} />
-      </Head>
-
       <div className="mb-6">
         <h3 className="text-gray-400 mb-2">Share on social media</h3>
         <div className="flex flex-wrap gap-4">

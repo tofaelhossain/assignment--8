@@ -40,32 +40,32 @@ const SearchResults = () => {
   }, [query]); // Re-fetch when query changes
 
   return (
-    <main class="container mx-auto px-4 pt-24 pb-8">
-      <div class="mb-6">
-        <h1 class="text-2xl font-bold">{`Search Results for "${query}"`}</h1>
+    <main className="container mx-auto px-4 pt-24 pb-8">
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold">{`Search Results for "${query}"`}</h1>
         {loading && <p>Loading...</p>}
         {error && <p>{error}</p>}
-        <p class="text-gray-400">Found {results.length} results</p>
+        <p className="text-gray-400">Found {results.length} results</p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6">
         {results.length > 0 ? (
           results.map((movie) => (
             <Link
               href={`/movie/${movie?.id}`}
-              class="bg-zinc-900 rounded-lg overflow-hidden hover:scale-105 transition-transform"
+              className="bg-zinc-900 rounded-lg overflow-hidden hover:scale-105 transition-transform"
               key={movie?.id}
             >
               <Image
                 src={`https://image.tmdb.org/t/p/w500/${movie?.poster_path}`}
                 alt={movie?.title}
-                class="w-full aspect-[2/3] object-cover"
+                className="w-full aspect-[2/3] object-cover"
                 width={300}
                 height={300}
               />
-              <div class="p-4">
-                <h3 class="font-bold mb-2">{movie?.title}</h3>
-                <div class="flex justify-between text-sm text-gray-400">
+              <div className="p-4">
+                <h3 className="font-bold mb-2">{movie?.title}</h3>
+                <div className="flex justify-between text-sm text-gray-400">
                   <span>{movie?.release_date?.split("-")[0] || "N/A"}</span>
                   <span>⭐ {movie?.vote_average}</span>
                 </div>

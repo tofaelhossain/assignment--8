@@ -8,6 +8,36 @@ import { placeholderBase64 } from "@/utils/imagePlaceholders";
 import Image from "next/image";
 import { Suspense } from "react";
 
+export async function generateMetadata({ params: { movieId } }) {
+  // Fetch movie details
+  const movieInfo = await getMovieDetailsWithCast(movieId);
+
+  // Fallbacks in case some data is missing
+  const title = movieInfo?.title || "Lws-Moviedb - Untitled";
+  const description =
+    movieInfo?.overview ||
+    "Explore this movie on Lws-Moviedb. Discover details, cast, and more!";
+  const image = movieInfo?.backdrop_path
+    ? `https://image.tmdb.org/t/p/original/${movieInfo.backdrop_path}`
+    : "https://example.com/default-image.jpg"; // Replace with your default image
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [image],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
+  };
+}
+
 export default async function MovieDetailsPage({ params: { movieId } }) {
   const movie = await getMovieDetailsWithCast(movieId);
   //console.log(movie);
