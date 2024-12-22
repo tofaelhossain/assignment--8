@@ -107,7 +107,7 @@ export default async function MovieDetailsPage({ params: { movieId } }) {
                     </div>
                   </div>
                 </div>
-                <ShareOnMedia />
+                <ShareOnMedia movie={movie} />
               </div>
             </div>
           </div>
