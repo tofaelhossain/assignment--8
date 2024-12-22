@@ -5,18 +5,40 @@ import {
   createWatchList,
   findMovieInWatchList,
   findUserByCredentials,
+  findUserByEmail,
   getWatchlistByUser,
   removeFromWatchList,
 } from "@/db/queries";
 import connectMongo from "@/dbConnect/connectMongo";
 
-import { redirect } from "next/navigation";
+//import { redirect } from "next/navigation";
 
-async function registerUser(formData) {
+/* async function registerUser(formData) {
   const user = Object.fromEntries(formData);
   await connectMongo();
   await createUser(user);
   redirect("/login");
+} */
+
+async function registerUser(formData) {
+  const { firstName, lastName, email, password } = formData;
+
+  try {
+    await connectMongo();
+    // Check if the email already exists in the database
+    const existingUser = await findUserByEmail(email);
+    if (existingUser) {
+      throw new Error("Email is already in use. Please choose another one.");
+    }
+
+    await connectMongo();
+    // If the email doesn't exist, proceed with user creation
+    const newUser = await createUser({ firstName, lastName, email, password });
+
+    return { success: true, message: "User successfully created" };
+  } catch (error) {
+    throw new Error(`Error creating user: ${error.message}`);
+  }
 }
 
 async function performLogin(formData) {

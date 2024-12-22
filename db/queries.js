@@ -16,6 +16,15 @@ async function createUser(user) {
   }
 }
 
+async function findUserByEmail(email) {
+  try {
+    const user = await userModel.findOne({ email });
+    return user; // Will return null if no user found
+  } catch (error) {
+    throw new Error("Error checking email");
+  }
+}
+
 async function findUserByCredentials(credential) {
   const user = await userModel.findOne(credential).lean();
   if (user) {
@@ -77,6 +86,7 @@ export {
   createWatchList,
   findMovieInWatchList,
   findUserByCredentials,
+  findUserByEmail,
   getWatchlistByUser,
   removeFromWatchList,
 };
