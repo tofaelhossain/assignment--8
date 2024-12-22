@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation"; // Correct import
 import { useEffect, useState } from "react";
 
-import SignInOut from "./auth/SigninOut";
+import SignInOut from "./auth/SignInOut";
 
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState("");
