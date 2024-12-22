@@ -1,4 +1,7 @@
 export default function MovieDetails() {
+  return <></>;
+}
+/* export default function MovieDetails() {
   return (
     <div id="movieDetails" className="min-h-screen pt-20 mb-8">
       <div className="relative h-screen">
@@ -188,3 +191,4 @@ export default function MovieDetails() {
     </div>
   );
 }
+ */

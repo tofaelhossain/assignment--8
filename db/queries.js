@@ -38,17 +38,13 @@ async function findMovieInWatchList({ user_id, movie_id }) {
   try {
     //console.log("Checking if movie is in watchlist:", { user_id, movie_id });
     const isInWatchlist = await watchModel.exists({ user_id, movie_id });
-    //console.log("Watchlist status:", isInWatchlist);
-    //return replaceMongoIdInObject(isInWatchlist) || false;
     return !!isInWatchlist;
   } catch (error) {
-    //console.error("Error checking watchlist:", error);
     throw new Error("Error checking if movie is in watchlist");
   }
 }
 
 async function removeFromWatchList({ user_id, movie_id }) {
-  //console.log("queries========>", user_id, movie_id);
   try {
     const result = await watchModel.deleteMany({ user_id, movie_id });
     if (result.deletedCount > 0) {
@@ -57,7 +53,7 @@ async function removeFromWatchList({ user_id, movie_id }) {
       return { success: false, message: "Movie not found in watchlist." };
     }
   } catch (error) {
-    console.error("Error removing movie from watchlist:", error);
+    //console.error("Error removing movie from watchlist:", error);
     throw new Error("Error removing movie from watchlist");
   }
 }
@@ -66,15 +62,12 @@ async function getWatchlistByUser({ user_id }) {
   try {
     // Find all watchlist entries for the specific user
     const watchlist = await watchModel.find({ user_id }).lean();
-    //console.log("Fetched watchlist from DB:", watchlist);
-    // Return the list of movies in the user's watchlist
-
     if (watchlist) {
       return replaceMongoIdInArray(watchlist);
     }
     return null;
   } catch (error) {
-    console.error("Error fetching user's watchlist:", error);
+    //console.error("Error fetching user's watchlist:", error);
     throw new Error("Error fetching watchlist");
   }
 }

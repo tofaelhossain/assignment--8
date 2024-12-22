@@ -42,7 +42,7 @@ const SearchResults = () => {
   return (
     <main class="container mx-auto px-4 pt-24 pb-8">
       <div class="mb-6">
-        <h1 class="text-2xl font-bold">Search Results for "{query}"</h1>
+        <h1 class="text-2xl font-bold">{`Search Results for "${query}"`}</h1>
         {loading && <p>Loading...</p>}
         {error && <p>{error}</p>}
         <p class="text-gray-400">Found {results.length} results</p>

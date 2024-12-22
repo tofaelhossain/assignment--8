@@ -59,7 +59,7 @@ async function checkMovieInWatchList({ user_id, movie_id }) {
     // Return the result
     return { isInWatchlist };
   } catch (error) {
-    console.error("Error checking if movie is in watchlist:", error);
+    //console.error("Error checking if movie is in watchlist:", error);
     throw new Error("Error checking watchlist");
   }
 }
@@ -70,7 +70,7 @@ async function removeFromDBWatchList({ user_id, movie_id }) {
     const result = await removeFromWatchList({ user_id, movie_id });
     return result;
   } catch (error) {
-    console.error("Error removing movie from watchlist:", error);
+    //console.error("Error removing movie from watchlist:", error);
     throw new Error("Error removing movie from watchlist");
   }
 }
@@ -81,7 +81,7 @@ async function getAllWatchlistOfUser({ user_id }) {
     const result = await getWatchlistByUser({ user_id });
     return result;
   } catch (error) {
-    console.error("Error getting watchlist of user:", error);
+    //console.error("Error getting watchlist of user:", error);
     throw new Error("Error getting watchlist of user");
   }
 }

@@ -29,7 +29,8 @@ export async function GET(__request, { params: { movieId } }) {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.error("Error fetching movie details and cast:", error.message);
+    //console.error("Error fetching movie details and cast:", error.message);
+    return { error: true, message: "data fetch error" };
     return null; // Return null or handle errors as needed
   }
 }
