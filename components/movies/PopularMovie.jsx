@@ -3,13 +3,42 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default async function PopularMovie() {
-  const movies = await getMoviesByCategory("popular");
+  //const movies = await getMoviesByCategory("popular");
+
+  let movies = [];
+  let error = null;
+
+  try {
+    const response = await getMoviesByCategory("popular");
+
+    movies = response?.results || [];
+  } catch (err) {
+    error = { error: true, message: "Error fetching popular movies" };
+  }
+
+  if (error) {
+    return (
+      <section className="mb-8">
+        <h2 className="text-2xl font-bold mb-4">Popular Movies</h2>
+        <p>{error.message}</p>
+      </section>
+    );
+  }
+
+  if (!movies.length) {
+    return (
+      <section className="mb-8">
+        <h2 className="text-2xl font-bold mb-4">Popular Movies</h2>
+        <p>No movies available at the moment.</p>
+      </section>
+    );
+  }
 
   return (
     <section className="mb-8">
       <h2 className="text-2xl font-bold mb-4">Popular on MOVIE DB</h2>
       <div id="trendingMovies" className="flex space-x-4 overflow-x-auto pb-4">
-        {movies?.results.map((movie) => (
+        {movies.map((movie) => (
           <div
             className="flex-shrink-0 w-48 cursor-pointer hover:scale-105 transition-transform"
             key={movie?.id}
